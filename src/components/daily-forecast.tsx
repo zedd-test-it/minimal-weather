@@ -16,38 +16,34 @@ interface DailyForecastProps {
 export function DailyForecast({ data, unit }: DailyForecastProps) {
   return (
     <motion.div
-      className="glass rounded-2xl p-4 text-white"
+      className="kakao-card p-4"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.3 }}
     >
-      <h3 className="text-xs font-medium opacity-70 uppercase tracking-wide mb-3">
-        7일 예보
+      <h3 className="text-xs text-amber-700/60 dark:text-amber-300/60 font-bold mb-3">
+        📅 주간 예보
       </h3>
-      <div className="flex flex-col divide-y divide-white/10">
+      <div className="flex flex-col gap-1">
         {data.map((day, i) => (
           <div
             key={day.date}
-            className="flex items-center justify-between py-3 first:pt-0 last:pb-0"
+            className="flex items-center justify-between py-2.5 px-2 rounded-xl hover:bg-amber-50 dark:hover:bg-amber-900/20 transition-colors"
           >
-            <span className="text-sm w-16">
+            <span className="text-sm text-amber-800 dark:text-amber-200 w-14">
               {i === 0 ? "오늘" : formatDay(day.date)}
             </span>
             <div className="flex items-center gap-2 flex-1 justify-center">
-              <WeatherIcon
-                iconCode={day.iconCode}
-                className="w-5 h-5"
-                strokeWidth={1.5}
-              />
-              <span className="text-xs capitalize opacity-75 hidden sm:inline">
+              <WeatherIcon iconCode={day.iconCode} size="sm" />
+              <span className="text-xs text-amber-700/60 dark:text-amber-300/60 capitalize hidden sm:inline">
                 {day.description}
               </span>
             </div>
             <div className="flex gap-2 text-sm">
-              <span className="opacity-60 w-12 text-right">
+              <span className="text-amber-600/50 dark:text-amber-400/50 w-12 text-right">
                 {formatTemp(day.temp_min, unit)}
               </span>
-              <span className="font-medium w-12 text-right">
+              <span className="font-bold text-amber-900 dark:text-amber-100 w-12 text-right">
                 {formatTemp(day.temp_max, unit)}
               </span>
             </div>

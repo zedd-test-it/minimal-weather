@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Droplets, Wind, Gauge, Eye } from "lucide-react";
 import type { CurrentWeather } from "@/types/weather";
 
 interface WeatherDetailsProps {
@@ -12,37 +11,21 @@ const container = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: { staggerChildren: 0.1 },
+    transition: { staggerChildren: 0.08 },
   },
 };
 
 const item = {
-  hidden: { opacity: 0, y: 10 },
-  show: { opacity: 1, y: 0 },
+  hidden: { opacity: 0, y: 10, scale: 0.9 },
+  show: { opacity: 1, y: 0, scale: 1 },
 };
 
 export function WeatherDetails({ data }: WeatherDetailsProps) {
   const details = [
-    {
-      label: "습도",
-      value: `${data.humidity}%`,
-      icon: Droplets,
-    },
-    {
-      label: "풍속",
-      value: `${data.wind_speed.toFixed(1)} m/s`,
-      icon: Wind,
-    },
-    {
-      label: "기압",
-      value: `${data.pressure} hPa`,
-      icon: Gauge,
-    },
-    {
-      label: "가시거리",
-      value: `${data.visibility.toFixed(1)} km`,
-      icon: Eye,
-    },
+    { emoji: "💧", label: "습도", value: `${data.humidity}%` },
+    { emoji: "💨", label: "바람", value: `${data.wind_speed.toFixed(1)} m/s` },
+    { emoji: "🔵", label: "기압", value: `${data.pressure} hPa` },
+    { emoji: "👁️", label: "가시거리", value: `${data.visibility.toFixed(1)} km` },
   ];
 
   return (
@@ -55,19 +38,18 @@ export function WeatherDetails({ data }: WeatherDetailsProps) {
       {details.map((d) => (
         <motion.div
           key={d.label}
-          className="glass rounded-2xl p-4 text-white"
+          className="kakao-card p-4 text-center"
           variants={item}
         >
-          <div className="flex items-center gap-2 mb-2">
-            <d.icon className="w-4 h-4 opacity-70" />
-            <span className="text-xs font-medium opacity-70 uppercase tracking-wide">
-              {d.label}
-            </span>
-          </div>
-          <p className="text-xl font-semibold">{d.value}</p>
+          <span className="text-2xl block mb-1">{d.emoji}</span>
+          <p className="text-xs text-amber-700/60 dark:text-amber-300/60 mb-0.5">
+            {d.label}
+          </p>
+          <p className="text-lg font-bold text-amber-900 dark:text-amber-100">
+            {d.value}
+          </p>
         </motion.div>
       ))}
     </motion.div>
   );
 }
-

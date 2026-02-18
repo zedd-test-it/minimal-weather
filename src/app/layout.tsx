@@ -1,25 +1,20 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Jua } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jua = Jua({
+  weight: "400",
+  variable: "--font-jua",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Minimal Weather",
-  description:
-    "실시간 날씨 및 예보 정보를 직관적인 인사이트로 제공하는 날씨 서비스",
+  title: "카카오 날씨",
+  description: "귀엽고 깜찍한 카카오 스타일 날씨 앱",
   openGraph: {
-    title: "Minimal Weather",
-    description: "실시간 날씨 및 예보 정보를 직관적인 인사이트로 제공",
+    title: "카카오 날씨",
+    description: "귀엽고 깜찍한 카카오 스타일 날씨 앱",
     type: "website",
   },
 };
@@ -31,12 +26,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${jua.variable} font-sans antialiased`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >

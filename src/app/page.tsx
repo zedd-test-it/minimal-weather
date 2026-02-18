@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { CloudSun, MapPin, Loader2 } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { WeatherBackground } from "@/components/weather-background";
 import { CurrentWeather } from "@/components/current-weather";
@@ -78,7 +77,7 @@ export default function Home() {
               />
             </div>
           </div>
-          <div className="flex items-center gap-1 shrink-0">
+          <div className="flex items-center gap-1.5 shrink-0">
             <UnitToggle unit={unit} onToggle={toggleUnit} />
             <ThemeToggle />
           </div>
@@ -141,8 +140,8 @@ export default function Home() {
         </main>
 
         {/* Footer */}
-        <footer className="text-center py-3 text-white/30 text-xs">
-          Minimal Weather
+        <footer className="text-center py-3 text-amber-800/30 dark:text-amber-200/30 text-xs">
+          🐥 카카오 날씨
         </footer>
       </div>
     </WeatherBackground>
@@ -157,12 +156,20 @@ function GeoLoadingState() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <div className="flex flex-col items-center gap-4 text-white text-center">
-        <Loader2 className="w-10 h-10 animate-spin opacity-60" />
-        <div className="space-y-1">
-          <p className="text-sm font-medium">현재 위치를 확인하고 있습니다</p>
-          <p className="text-xs opacity-60">위치 접근을 허용해주세요</p>
-        </div>
+      <div className="kakao-card-main p-8 text-center">
+        <motion.span
+          className="text-5xl block mb-4"
+          animate={{ rotate: [0, 10, -10, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+        >
+          🐥
+        </motion.span>
+        <p className="text-sm font-bold text-amber-800 dark:text-amber-200">
+          현재 위치를 찾고 있어요!
+        </p>
+        <p className="text-xs text-amber-600/60 dark:text-amber-400/60 mt-1">
+          위치 접근을 허용해주세요~
+        </p>
       </div>
     </motion.div>
   );
@@ -186,35 +193,43 @@ function EmptyState({ geoError }: { geoError?: string | null }) {
 
   return (
     <motion.div
-      className="flex flex-col items-center gap-6 text-white text-center px-6"
+      className="flex flex-col items-center gap-5 text-center px-6"
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
     >
-      <div className="glass rounded-full p-6">
-        <CloudSun className="w-16 h-16 opacity-80" strokeWidth={1.2} />
-      </div>
-      <div className="space-y-2">
-        <h1 className="text-2xl font-semibold tracking-tight">
-          Minimal Weather
+      <motion.div
+        className="kakao-card-main p-8"
+        animate={{ y: [0, -5, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <span className="text-7xl block mb-3">🐥</span>
+        <h1 className="text-2xl font-bold text-amber-900 dark:text-amber-100">
+          카카오 날씨
         </h1>
-        <p className="text-lg opacity-80">{timeStr}</p>
-        <p className="text-xs opacity-50">{dateStr}</p>
-      </div>
+        <p className="text-xl text-amber-800 dark:text-amber-200 mt-2">
+          {timeStr}
+        </p>
+        <p className="text-xs text-amber-600/50 dark:text-amber-400/50 mt-1">
+          {dateStr}
+        </p>
+      </motion.div>
 
       {geoError && (
-        <div className="glass rounded-xl px-4 py-3 text-xs opacity-70 flex items-center gap-2">
-          <MapPin className="w-3.5 h-3.5 shrink-0" />
-          <span>{geoError} — 도시를 직접 검색해주세요</span>
+        <div className="kakao-card px-4 py-3 text-xs text-amber-700 dark:text-amber-300">
+          📍 {geoError} — 도시를 직접 검색해주세요!
         </div>
       )}
 
-      <p className="text-sm opacity-60 max-w-[260px] leading-relaxed">
-        도시를 검색하여 날씨와 오늘의 옷차림 추천을 확인하세요
-      </p>
+      <div className="kakao-card px-5 py-3 text-sm text-amber-800 dark:text-amber-200">
+        🔍 도시를 검색해서 날씨를 확인해봐요!
+      </div>
 
-      <div className="glass rounded-full px-4 py-2 text-xs opacity-50">
-        <kbd className="font-mono">Ctrl</kbd> + <kbd className="font-mono">K</kbd> 로 빠르게 검색
+      <div className="text-xs text-amber-700/40 dark:text-amber-300/40">
+        <kbd className="bg-white/60 dark:bg-amber-900/40 px-2 py-0.5 rounded border border-amber-300/30">Ctrl</kbd>
+        {" + "}
+        <kbd className="bg-white/60 dark:bg-amber-900/40 px-2 py-0.5 rounded border border-amber-300/30">K</kbd>
+        {" 로 빠르게 검색!"}
       </div>
     </motion.div>
   );
@@ -223,15 +238,16 @@ function EmptyState({ geoError }: { geoError?: string | null }) {
 function ErrorState({ message }: { message: string }) {
   return (
     <motion.div
-      className="glass rounded-2xl p-8 text-white text-center max-w-sm"
+      className="kakao-card-main p-8 text-center max-w-sm"
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
     >
-      <p className="text-lg font-semibold mb-2">
-        날씨 정보를 불러올 수 없습니다
+      <span className="text-4xl block mb-3">😢</span>
+      <p className="text-lg font-bold text-amber-900 dark:text-amber-100">
+        앗! 날씨를 불러올 수 없어요
       </p>
-      <p className="text-sm opacity-70">{message}</p>
+      <p className="text-sm text-amber-700/60 dark:text-amber-300/60 mt-2">{message}</p>
     </motion.div>
   );
 }

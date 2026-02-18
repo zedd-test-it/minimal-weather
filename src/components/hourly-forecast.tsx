@@ -13,30 +13,26 @@ interface HourlyForecastProps {
 export function HourlyForecast({ data, unit }: HourlyForecastProps) {
   return (
     <motion.div
-      className="glass rounded-2xl p-4 text-white"
+      className="kakao-card p-4"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
     >
-      <h3 className="text-xs font-medium opacity-70 uppercase tracking-wide mb-3">
-        시간별 예보
+      <h3 className="text-xs text-amber-700/60 dark:text-amber-300/60 font-bold mb-3">
+        ⏰ 시간별 예보
       </h3>
       <ScrollArea className="w-full">
-        <div className="flex gap-4 pb-2">
+        <div className="flex gap-3 pb-2">
           {data.map((hour, i) => (
             <div
               key={hour.time}
-              className="flex flex-col items-center gap-1.5 min-w-[56px]"
+              className="flex flex-col items-center gap-1 min-w-[60px] py-2 px-1 rounded-2xl hover:bg-amber-50 dark:hover:bg-amber-900/20 transition-colors"
             >
-              <span className="text-xs opacity-70">
+              <span className="text-xs text-amber-700/60 dark:text-amber-300/60">
                 {i === 0 ? "지금" : formatHour(hour.time)}
               </span>
-              <WeatherIcon
-                iconCode={hour.iconCode}
-                className="w-6 h-6"
-                strokeWidth={1.5}
-              />
-              <span className="text-sm font-medium">
+              <WeatherIcon iconCode={hour.iconCode} size="sm" />
+              <span className="text-sm font-bold text-amber-900 dark:text-amber-100">
                 {formatTemp(hour.temp, unit)}
               </span>
             </div>

@@ -125,83 +125,89 @@
   }
 }
 
-/* Weather dynamic background gradients — darkened for text contrast */
+/* === Kakao-style weather backgrounds — warm & cute === */
 .weather-bg-clear-day {
-  background: linear-gradient(160deg, #1565c0 0%, #0d47a1 40%, #1976d2 100%);
+  background: linear-gradient(160deg, #FEE500 0%, #FFB800 50%, #FF9500 100%);
 }
 .weather-bg-clear-night {
-  background: linear-gradient(160deg, #0a0e27 0%, #1a1145 50%, #0d0b2e 100%);
+  background: linear-gradient(160deg, #2c1654 0%, #44267a 50%, #1a0a3e 100%);
 }
 .weather-bg-cloudy {
-  background: linear-gradient(160deg, #546e7a 0%, #455a64 50%, #37474f 100%);
+  background: linear-gradient(160deg, #d4c4a8 0%, #b8a88e 50%, #a09078 100%);
 }
 .weather-bg-rain {
-  background: linear-gradient(160deg, #37474f 0%, #263238 50%, #1a252f 100%);
+  background: linear-gradient(160deg, #7a92a5 0%, #5d7a8f 50%, #4a6578 100%);
 }
 .weather-bg-snow {
-  background: linear-gradient(160deg, #607d8b 0%, #546e7a 50%, #455a64 100%);
+  background: linear-gradient(160deg, #c8b8e8 0%, #b0a0d8 50%, #9888c8 100%);
 }
 .weather-bg-thunderstorm {
-  background: linear-gradient(160deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  background: linear-gradient(160deg, #3d2c5e 0%, #2a1f42 50%, #1e1530 100%);
 }
 
 .dark .weather-bg-clear-day {
-  background: linear-gradient(160deg, #0d1b2a 0%, #1b2838 50%, #0a1628 100%);
+  background: linear-gradient(160deg, #3a2e00 0%, #4a3a00 50%, #2a2000 100%);
 }
 .dark .weather-bg-cloudy {
-  background: linear-gradient(160deg, #1a252f 0%, #141e27 100%);
+  background: linear-gradient(160deg, #2a2520 0%, #1e1a15 100%);
 }
 .dark .weather-bg-snow {
-  background: linear-gradient(160deg, #1a252f 0%, #263238 100%);
+  background: linear-gradient(160deg, #2a2040 0%, #1e1530 100%);
 }
 
-/* Glassmorphism card — premium feel */
-.glass {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px) saturate(1.8);
-  -webkit-backdrop-filter: blur(20px) saturate(1.8);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+/* === Kakao-style cute cards === */
+.kakao-card {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 2px solid rgba(254, 229, 0, 0.3);
+  border-radius: 24px;
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    0 4px 20px rgba(0, 0, 0, 0.06),
+    0 1px 4px rgba(0, 0, 0, 0.04);
 }
-.dark .glass {
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(20px) saturate(1.6);
-  -webkit-backdrop-filter: blur(20px) saturate(1.6);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+.dark .kakao-card {
+  background: rgba(60, 30, 30, 0.85);
+  border: 2px solid rgba(254, 229, 0, 0.15);
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Elevated glass variant for primary cards */
-.glass-elevated {
-  background: rgba(255, 255, 255, 0.14);
-  backdrop-filter: blur(24px) saturate(2);
-  -webkit-backdrop-filter: blur(24px) saturate(2);
-  border: 1px solid rgba(255, 255, 255, 0.22);
+/* Elevated variant for main card */
+.kakao-card-main {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 3px solid rgba(254, 229, 0, 0.4);
+  border-radius: 28px;
   box-shadow:
-    0 12px 40px rgba(0, 0, 0, 0.15),
-    0 4px 12px rgba(0, 0, 0, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    0 8px 30px rgba(254, 229, 0, 0.15),
+    0 2px 8px rgba(0, 0, 0, 0.05);
 }
-.dark .glass-elevated {
-  background: rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(24px) saturate(1.6);
-  -webkit-backdrop-filter: blur(24px) saturate(1.6);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+.dark .kakao-card-main {
+  background: rgba(60, 30, 30, 0.9);
+  border: 3px solid rgba(254, 229, 0, 0.2);
   box-shadow:
-    0 12px 40px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    0 8px 30px rgba(0, 0, 0, 0.25);
 }
 
-/* Text shadow for readability on any background */
+/* Kakao accent colors */
+.kakao-yellow { color: #FEE500; }
+.kakao-brown { color: #3C1E1E; }
+.bg-kakao-yellow { background-color: #FEE500; }
+.bg-kakao-brown { background-color: #3C1E1E; }
+
+/* Font override for Jua */
+.font-sans {
+  font-family: var(--font-jua), 'Apple SD Gothic Neo', sans-serif;
+}
+
+/* Text shadow for readability on colored backgrounds */
 .text-shadow {
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 }
 .text-shadow-lg {
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Hide scrollbar for horizontal scroll areas */

@@ -1,48 +1,54 @@
 "use client";
 
-import {
-  Sun,
-  Moon,
-  Cloud,
-  CloudRain,
-  CloudSnow,
-  CloudLightning,
-  CloudDrizzle,
-  CloudFog,
-  type LucideProps,
-} from "lucide-react";
-
-interface WeatherIconProps extends LucideProps {
+interface WeatherIconProps {
   iconCode: string;
+  className?: string;
+  size?: "sm" | "md" | "lg" | "xl";
 }
 
-const iconMap: Record<string, React.ComponentType<LucideProps>> = {
-  "01d": Sun,
-  "01n": Moon,
-  "02d": Cloud,
-  "02n": Cloud,
-  "03d": Cloud,
-  "03n": Cloud,
-  "04d": Cloud,
-  "04n": Cloud,
-  "09d": CloudDrizzle,
-  "09n": CloudDrizzle,
-  "10d": CloudRain,
-  "10n": CloudRain,
-  "11d": CloudLightning,
-  "11n": CloudLightning,
-  "13d": CloudSnow,
-  "13n": CloudSnow,
-  "50d": CloudFog,
-  "50n": CloudFog,
+const emojiMap: Record<string, string> = {
+  "01d": "☀️",
+  "01n": "🌙",
+  "02d": "⛅",
+  "02n": "☁️",
+  "03d": "☁️",
+  "03n": "☁️",
+  "04d": "☁️",
+  "04n": "☁️",
+  "09d": "🌧️",
+  "09n": "🌧️",
+  "10d": "🌦️",
+  "10n": "🌧️",
+  "11d": "⛈️",
+  "11n": "⛈️",
+  "13d": "❄️",
+  "13n": "❄️",
+  "50d": "🌫️",
+  "50n": "🌫️",
 };
 
-export function WeatherIcon({ iconCode, ...props }: WeatherIconProps) {
-  const Icon = iconMap[iconCode] || Cloud;
+const sizeMap = {
+  sm: "text-xl",
+  md: "text-3xl",
+  lg: "text-5xl",
+  xl: "text-7xl sm:text-8xl",
+};
+
+export function WeatherIcon({
+  iconCode,
+  className = "",
+  size = "md",
+}: WeatherIconProps) {
+  const emoji = emojiMap[iconCode] || "☁️";
+
   return (
-    <Icon
-      aria-label={`Weather icon: ${iconCode}`}
-      {...props}
-    />
+    <span
+      role="img"
+      aria-label={`Weather: ${iconCode}`}
+      className={`inline-block leading-none select-none ${sizeMap[size]} ${className}`}
+      style={{ filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.1))" }}
+    >
+      {emoji}
+    </span>
   );
 }

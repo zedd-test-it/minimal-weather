@@ -1,7 +1,5 @@
 "use client";
 
-import { X } from "lucide-react";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { SavedLocation } from "@/types/weather";
 
 interface LocationTabsProps {
@@ -20,28 +18,35 @@ export function LocationTabs({
   if (locations.length === 0) return null;
 
   return (
-    <Tabs value={activeId ?? undefined} onValueChange={onSelect}>
-      <TabsList className="bg-white/10 border-0 h-auto flex-wrap gap-1 p-1">
-        {locations.map((loc) => (
-          <TabsTrigger
+    <div className="flex gap-1.5 flex-wrap">
+      {locations.map((loc) => {
+        const isActive = loc.id === activeId;
+        return (
+          <button
             key={loc.id}
-            value={loc.id}
-            className="text-white/80 data-[state=active]:bg-white/20 data-[state=active]:text-white text-xs px-3 py-1.5 rounded-full gap-1.5"
+            onClick={() => onSelect(loc.id)}
+            className={`
+              flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full transition-all active:scale-95
+              ${
+                isActive
+                  ? "bg-amber-400 text-amber-900 border-2 border-amber-500 shadow-sm"
+                  : "bg-white/70 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 border-2 border-amber-200/50 dark:border-amber-700/30 hover:bg-white dark:hover:bg-amber-900/60"
+              }
+            `}
           >
             {loc.name}
-            <button
+            <span
               onClick={(e) => {
                 e.stopPropagation();
                 onRemove(loc.id);
               }}
-              className="ml-0.5 hover:bg-white/20 rounded-full p-0.5"
-              aria-label={`${loc.name} 삭제`}
+              className="hover:bg-amber-600/20 rounded-full w-4 h-4 flex items-center justify-center text-[10px] leading-none"
             >
-              <X className="w-3 h-3" />
-            </button>
-          </TabsTrigger>
-        ))}
-      </TabsList>
-    </Tabs>
+              ✕
+            </span>
+          </button>
+        );
+      })}
+    </div>
   );
 }
